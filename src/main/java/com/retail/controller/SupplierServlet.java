@@ -19,6 +19,12 @@ public class SupplierServlet extends HttpServlet {
             supplierDAO.deleteSupplier(Integer.parseInt(request.getParameter("id")));
             response.sendRedirect(request.getContextPath() + "/suppliers?msg=success");
             return;
+        }else if ("view".equals(action)) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            Supplier s = supplierDAO.getSupplierById(id);
+            request.setAttribute("supplier", s);
+            request.getRequestDispatcher("WEB-INF/views/product/supplier-view.jsp").forward(request, response);
+            return;
         }
         request.setAttribute("supplierList", supplierDAO.getAllSuppliers());
         request.getRequestDispatcher("WEB-INF/views/product/supplier-list.jsp").forward(request, response);

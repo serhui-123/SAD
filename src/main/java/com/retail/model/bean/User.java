@@ -10,15 +10,19 @@ public class User implements Serializable {
     private String password;
     private String fullName;
     private String role; // OWNER, CASHIER, INVENTORY_STAFF
+    private String phone;  // New field
+    private String email;
 
     public User() {}
 
-    public User(int userId, String username, String password, String fullName, String role) {
+    public User(int userId, String username, String password, String fullName, String role, String phone, String email) {
         this.userId = userId;
         this.username = username;
         this.password = password;
         this.fullName = fullName;
         this.role = role;
+        this.phone = phone;
+        this.email = email;
     }
 
     public int getUserId() { return userId; }
@@ -35,4 +39,10 @@ public class User implements Serializable {
 
     public String getRole() { return role; }
     public void setRole(String role) { this.role = role; }
+
+    public String getPhone() { return phone; }
+    public void setPhone(String phone) { this.phone = phone; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 }

@@ -27,6 +27,27 @@ public class SupplierDAO {
         return list;
     }
 
+    public Supplier getSupplierById(int id) {
+        Supplier s = null;
+        String sql = "SELECT * FROM suppliers WHERE supplier_id = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    s = new Supplier();
+                    s.setSupplierId(rs.getInt("supplier_id"));
+                    s.setSupplierName(rs.getString("supplier_name"));
+                    s.setContactPerson(rs.getString("contact_person"));
+                    s.setPhone(rs.getString("phone"));
+                    s.setEmail(rs.getString("email"));
+                    s.setAddress(rs.getString("address"));
+                }
+            }
+        } catch (SQLException e) { e.printStackTrace(); }
+        return s;
+    }
+
     public boolean addSupplier(Supplier s) {
         String sql = "INSERT INTO suppliers (supplier_name, contact_person, phone, email, address) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = DBConnection.getConnection();
