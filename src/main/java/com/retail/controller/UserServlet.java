@@ -21,12 +21,17 @@ public class UserServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setCharacterEncoding("UTF-8");
+
         User u = new User();
+        u.setFullName(request.getParameter("fullName"));
         u.setUsername(request.getParameter("username"));
         u.setPassword(request.getParameter("password"));
-        u.setFullName(request.getParameter("fullName"));
         u.setRole(request.getParameter("role"));
+        u.setPhone(request.getParameter("phone")); // Capture Phone
+        u.setEmail(request.getParameter("email")); // Capture Email
+
         userDAO.registerUser(u);
-        response.sendRedirect("users");
+        response.sendRedirect("users?msg=added");
     }
 }

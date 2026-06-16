@@ -12,6 +12,8 @@
         body { background-color: #f8f9fa; min-height: 100vh; display: flex; flex-direction: column; }
         .navbar-brand { font-weight: bold; }
         footer { margin-top: auto; }
+        /* Style for the profile dropdown */
+        .user-dropdown .dropdown-toggle::after { vertical-align: middle; }
     </style>
 </head>
 <body>
@@ -62,10 +64,31 @@
                     </li>
                 </c:if>
             </ul>
-            <div class="navbar-text me-3 text-light">
-                <i class="bi bi-person-circle"></i> ${currentUser.fullName} (${currentUser.role})
+
+            <!-- User Profile Dropdown Section -->
+            <div class="user-dropdown">
+                <div class="dropdown">
+                    <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-circle"></i> ${currentUser.fullName}
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end shadow">
+                        <li><h6 class="dropdown-header">User: ${currentUser.username}</h6></li>
+                        <li><span class="dropdown-item-text small text-muted">Role: ${currentUser.role}</span></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="${pageContext.request.contextPath}/profile">
+                                <i class="bi bi-person-gear"></i> My Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item text-danger" href="${pageContext.request.contextPath}/logout">
+                                <i class="bi bi-box-arrow-right"></i> Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <a href="${pageContext.request.contextPath}/logout" class="btn btn-outline-danger btn-sm">Logout</a>
+
         </div>
     </div>
 </nav>

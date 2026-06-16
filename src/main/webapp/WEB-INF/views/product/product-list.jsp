@@ -38,6 +38,12 @@
                         </td>
                         <td>${p.categoryName}</td>
                         <td>${p.model}</td>
+                        <td>
+                            <a href="${pageContext.request.contextPath}/suppliers?action=view&id=${p.supplierId}"
+                               class="text-decoration-none fw-bold text-dark">
+                                <i class="bi bi-info-circle small"></i> ${p.supplierName}
+                            </a>
+                        </td>
                         <td class="text-end">RM <fmt:formatNumber value="${p.price}" minFractionDigits="2" /></td>
                         <td class="text-center">
                             <span class="fw-bold">${p.stockQuantity}</span>
